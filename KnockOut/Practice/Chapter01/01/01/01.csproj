@@ -99,6 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="doubleWay.cshtml" />
+    <Content Include="koArray.cshtml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="gettingStarted.html" />
     <Content Include="Scripts\home.js" />

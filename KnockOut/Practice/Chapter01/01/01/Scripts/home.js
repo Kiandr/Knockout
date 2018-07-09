@@ -20,6 +20,7 @@ $(function () {
         console.log(viewModel.firstName());
         viewModel.firstName("Omid");
         console.log(viewModel.firstName());
+        console.log(viewModel.emailAdderss());
     });
 });
 

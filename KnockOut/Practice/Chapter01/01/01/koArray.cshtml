@@ -1,0 +1,167 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>koArray</title>
+    <script src="Scripts/jquery-3.3.1.js"></script>
+    <script src="Scripts/knockout-3.4.2.js"></script>
+
+    <script>
+        "use strict";
+        var sampleData = {
+            ArrayObjectSampleData: [
+                {
+                    "ModelId": 1,
+                    "SalePrice": 1649.01,
+                    "ListPrice": 2199.00,
+                    "Rating": 5,
+                    "Photo": "Taylor 314-CE Left-Handed Grand Auditorium Acoustic-Electric Guitar.png",
+                    "CategoryId": 1,
+                    "ItemNumber": "T314CE",
+                    "Description": "Taylor 314-CE Left-Handed Grand Auditorium Acoustic-Electric Guitar",
+                    "Reviews": [
+                        {
+                            "ProductId": 4,
+                            "ReviewerName": "guitarhero",
+                            "Description":
+                                "This guitar has never let me down. I gig 3-6 nights a week and the 314CE just keeps on ticking. Change the battery and the strings regularly and she sounds like a dream everytime. If you want great sound, playability, dependability and just great playing fun get this guitar. You won\u0027t be sorry.",
+                            "ReviewDate": "\/Date(1302181440000)\/",
+                            "Id": 3
+                        },
+                        {
+                            "ProductId": 4,
+                            "ReviewerName": "billyjack",
+                            "Description": "Best guitar ever!",
+                            "ReviewDate": "\/Date(1302218040000)\/",
+                            "Id": 4
+                        }
+                    ],
+                    "Model": { "Name": "Taylor 314ce", "Id": 1 },
+                    "Category": { "Name": "Acoustic Guitars", "Id": 1 },
+                    "Id": 4
+                },
+                {
+                    "ModelId": 1,
+                    "SalePrice": 1649.01,
+                    "ListPrice": 2199.00,
+                    "Rating": 5,
+                    "Photo": "Taylor 314-CE Left-Handed Grand Auditorium Acoustic-Electric Guitar.png",
+                    "CategoryId": 1,
+                    "ItemNumber": "T314CE",
+                    "Description": "Taylor 314-CE Left-Handed Grand Auditorium Acoustic-Electric Guitar",
+                    "Reviews": [
+                        {
+                            "ProductId": 4,
+                            "ReviewerName": "guitarhero",
+                            "Description":
+                                "This guitar has never let me down. I gig 3-6 nights a week and the 314CE just keeps on ticking. Change the battery and the strings regularly and she sounds like a dream everytime. If you want great sound, playability, dependability and just great playing fun get this guitar. You won\u0027t be sorry.",
+                            "ReviewDate": "\/Date(1302181440000)\/",
+                            "Id": 3
+                        },
+                        {
+                            "ProductId": 4,
+                            "ReviewerName": "billyjack",
+                            "Description": "Best guitar ever!",
+                            "ReviewDate": "\/Date(1302218040000)\/",
+                            "Id": 4
+                        }
+                    ],
+                    "Model": { "Name": "Taylor 314ce", "Id": 1 },
+                    "Category": { "Name": "Acoustic Guitars", "Id": 1 },
+                    "Id": 4
+                },
+                {
+                    "ModelId": 1,
+                    "SalePrice": 1649.01,
+                    "ListPrice": 2199.00,
+                    "Rating": 5,
+                    "Photo": "Taylor 314-CE Left-Handed Grand Auditorium Acoustic-Electric Guitar.png",
+                    "CategoryId": 1,
+                    "ItemNumber": "T314CE",
+                    "Description": "Taylor 314-CE Left-Handed Grand Auditorium Acoustic-Electric Guitar",
+                    "Reviews": [
+                        {
+                            "ProductId": 4,
+                            "ReviewerName": "guitarhero",
+                            "Description":
+                                "This guitar has never let me down. I gig 3-6 nights a week and the 314CE just keeps on ticking. Change the battery and the strings regularly and she sounds like a dream everytime. If you want great sound, playability, dependability and just great playing fun get this guitar. You won\u0027t be sorry.",
+                            "ReviewDate": "\/Date(1302181440000)\/",
+                            "Id": 3
+                        },
+                        {
+                            "ProductId": 4,
+                            "ReviewerName": "billyjack",
+                            "Description": "Best guitar ever!",
+                            "ReviewDate": "\/Date(1302218040000)\/",
+                            "Id": 4
+                        }
+                    ],
+                    "Model": { "Name": "Taylor 314ce", "Id": 1 },
+                    "Category": { "Name": "Acoustic Guitars", "Id": 1 },
+                    "Id": 4
+                }
+            ]
+        };
+
+        var ProductKoModel = function() {
+            this.Description = ko.observable();
+
+        };
+
+
+        var viewModel = {
+            productArrayObservables: ko.observableArray([]),
+           load: function() {
+                $.each(sampleData.ArrayObjectSampleData,
+                    function(i, p) {
+
+                        viewModel.productArrayObservables.push(new ProductKoModel().Description(p.Description));
+                        
+                        console.log(p);
+                    });
+            }
+        };
+
+        $(document).ready(function () {
+            viewModel.load();
+            ko.applyBindings(viewModel);
+
+            console.log("document loaded");
+        });
+
+
+    </script>
+</head>
+
+<body>
+
+
+<div id="example">
+
+
+    <span data-bind="text : productArrayObservables().length"></span>
+
+    <select multiple="multiple" data-bind="options : productArrayObservables, optionsText:'Description' "></select>
+
+    @*<div >
+            <select  multiple="multiple"
+                    data-bind="@*options:products,selectedOptions:selectedProductsObservableArray , optionsText:'Description'">
+            </select>
+
+            <div>
+                <button data-bind="click: removeSelected, enable: productsAreSelected" >Remove</button>
+                <button data-bind="click: sortProducts, enable: productsExist">Sort</button>
+            </div>
+
+            <form data-bind="submit: addItem">
+                Add item:
+                <input type="text" data-bind="value:itemToAddObservableArray, valueUpdate:'afterkeydown'" />
+                <button type="submit" data-bind="enable: itemToAddObservableArray().length > 0">Add</button>
+            </form>*@
+
+</div>
+
+
+</body>
+</html>
+
