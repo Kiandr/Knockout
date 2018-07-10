@@ -1,0 +1,160 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>koArray</title>
+    <script src="/Scripts/jquery-3.3.1.js"></script>
+    <script src="/Scripts/knockout-3.4.2.debug.js"></script>
+
+    <script type="text/javascript">
+        "use strict";
+        // 
+        //$(function() {
+        $(document).ready(function() {
+            var Car = function() {
+                var self = this;
+                self.key = ko.observable();
+                self.color = ko.observable();
+                self.year = ko.observable();
+                self.modelKey = ko.observable();
+                self.desc = ko.computed(function() {
+                    return self.year() + " " + self.color;
+                });
+            };
+
+            // build data 
+
+            var data = {
+                allCars: [
+                    { key: "ASD928K1", color: "red", year: "2008", modelKey: "1" },
+                    { key: "J89J1233", color: "blue", year: "2008", modelKey: "1" },
+                    { key: "ASDF23RF", color: "red", year: "2008", modelKey: "1" },
+                    { key: "Y8M34N9", color: "red", year: "2008", modelKey: "1" },
+                    { key: "ASD928K1", color: "red", year: "2008", modelKey: "1" },
+                    { key: "ASD928K1", color: "red", year: "2008", modelKey: "1" },
+                    { key: "SGS4SDG4", color: "red", year: "2008", modelKey: "1" },
+                    { key: "ASD928K1", color: "red", year: "2008", modelKey: "1" },
+                    { key: "ASD928K1", color: "red", year: "2008", modelKey: "1" },
+                    { key: "ASD928K1", color: "red", year: "2008", modelKey: "1" },
+                    { key: "ASD928K1", color: "red", year: "2008", modelKey: "1" },
+                    { key: "ASD928K1", color: "red", year: "2008", modelKey: "1" },
+                ]
+            };
+            //    new car().key("KJAS90U2").color("red").year(2011).modelKey("1"),
+            //    new car().key("J89J1233").color("black").year(2009).modelKey("1"),
+            //    new car().key("Y8M34N9").color("blue").year(2008).modelKey("1"),
+            //    new car().key("ASD3DFG2").color("yellow").year(2008).modelKey("2"),
+            //    new car().key("ASDF23RF").color("red").year(2007).modelKey("2"),
+            //    new car().key("SGS4SDG4").color("white").year(2009).modelKey("3"),
+            //    new car().key("KJD347D3").color("blue").year(2010).modelKey("3"),
+            //    new car().key("D9F8R7E7").color("yellow").year(2012).modelKey("4"),
+            //    new car().key("K3K4L6S9").color("red").year(2009).modelKey("4"),
+            //    new car().key("W1M3L4K2").color("black").year(2007).modelKey("5"),
+            //    new car().key("UU33KK22").color("blue").year(2004).modelKey("5"),
+            //    new car().key("ASD098K2").color("purple").year(2008).modelKey("6"),
+            //    new car().key("LKJ123H4").color("red").year(2011).modelKey("6")
+
+
+
+
+            var viewModel = {
+                //makes : data.allMakes, // Lexus, Toyota, etc.
+                carArray: ko.observableArray(),
+                selectedModel: ko.observable("Kian"),
+                firstName: ko.observable(),
+                load: function () {
+                    //this.carArray.push(data.allCars);
+                    $.each(data.allCars, function (index, item) {
+ 
+                        viewModel.carArray.push(item);
+                    });
+                },
+                remove: function() {
+                    viewModel.carArray.pop();
+                }
+                //models : ko.computed(function() {
+                //    if (!this.selectedMake()) {
+                //        return null;
+                //    }
+                //    var filter = selectedMake().key.toLowerCase();
+                //    return ko.utils.arrayFilter(data.allModels,
+                //        function(item) {
+                //            const itemKey = item.makeKey.toLowerCase();
+                //            return ko.utils.stringStartsWith(itemKey, filter);
+                //        },
+                //        this);
+                //}),
+                //cars : ko.computed(function() {
+                //    if (!selectedModel()) return null;
+                //    var filter = selectedModel().key.toLowerCase();
+                //    return ko.utils.arrayFilter(data.allCars,
+                //        function(item) {
+                //            const itemKey = item.model.key().toLowerCase();
+                //            return ko.utils.stringStartsWith(itemKey, filter);
+                //        });
+
+                //})
+                //return ({
+                //    makes: makes,
+                //    selectedMake: selectedMake,
+                //    selectedModel: selectedModel,
+                //    selectedCar: selectedCar,
+                //    models: models,
+                //    cars: cars
+
+                //});
+
+                //});
+            };
+
+
+            viewModel.firstName.subscribe(function() {
+                    //viewModel.selectedModel("i saw you");
+                console.log(viewModel.firstName());
+                    viewModel.carArray.push(new Car().key(viewModel.firstName()).color("white"));
+                },
+                viewModel);
+
+            ko.applyBindings(viewModel);
+
+
+
+
+            var callHOme = function () {$("#callHome").click(function() {
+
+                // TODO: 
+                //get the value of the input
+                var data = viewModel.selectedModel(); // $("#firstName").val();
+                // call home using ajax: url, data, success, error  
+                    viewModel.load();
+            });
+            }
+            
+
+                callHOme();
+            } );
+        //});
+        
+
+
+    </script>
+</head>
+
+<body>
+<input id="firstName" data-bind="value: firstName, "/>
+
+
+<button id="callHome"> login</button>
+<button id="remove"  data-bind="click: remove"> remove</button>
+
+
+<div id="arrayTest">
+    <span data-bind="text:carArray().length"></span><span> Cars</span>
+    <select multiple="multiple" data-bind="options:carArray, optionsText:'key'">
+    </select>
+</div>
+
+
+</body>
+</html>
+
