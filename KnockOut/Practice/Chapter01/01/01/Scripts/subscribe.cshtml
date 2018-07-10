@@ -1,0 +1,115 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+    <title>koArray</title>
+    <script src="/Scripts/jquery-3.3.1.js"></script>
+    <script src="/Scripts/knockout-3.4.2.debug.js"></script>
+
+    <script type="text/javascript">
+        "use strict";
+        // 
+        $(function() {
+            var car = function() {
+                var self = this;
+                self.key = ko.observable();
+                self.color = ko.observable();
+                self.year = ko.observable();
+                self.modelKey = ko.observable();
+                self.desc = ko.computed(function() {
+                    return self.year() + " " + self.color;
+                });
+            };
+
+            // build data 
+
+            var data = {
+                allMakes: ko.observableArray([
+                    { name: "Lexus", key: "L" },
+                    { name: "BMW", key: "B" }
+                ]),
+                allModels: ko.observableArray([
+                    { name: "ISF", makeKey: "L", key: "1" },
+                    { name: "IS350", makeKey: "L", key: "2" },
+                    { name: "ES350", makeKey: "L", key: "3" },
+                    { name: "Z3", makeKey: "B", key: "4" },
+                    { name: "i335", makeKey: "B", key: "5" },
+                    { name: "i735", makeKey: "B", key: "6" }
+                ]),
+                allCars: ko.observableArray([
+                    new car().key("ASD928K1").color("red").year(2008).modelKey("1"),
+                    new car().key("KJAS90U2").color("red").year(2011).modelKey("1"),
+                    new car().key("J89J1233").color("black").year(2009).modelKey("1"),
+                    new car().key("Y8M34N9").color("blue").year(2008).modelKey("1"),
+                    new car().key("ASD3DFG2").color("yellow").year(2008).modelKey("2"),
+                    new car().key("ASDF23RF").color("red").year(2007).modelKey("2"),
+                    new car().key("SGS4SDG4").color("white").year(2009).modelKey("3"),
+                    new car().key("KJD347D3").color("blue").year(2010).modelKey("3"),
+                    new car().key("D9F8R7E7").color("yellow").year(2012).modelKey("4"),
+                    new car().key("K3K4L6S9").color("red").year(2009).modelKey("4"),
+                    new car().key("W1M3L4K2").color("black").year(2007).modelKey("5"),
+                    new car().key("UU33KK22").color("blue").year(2004).modelKey("5"),
+                    new car().key("ASD098K2").color("purple").year(2008).modelKey("6"),
+                    new car().key("LKJ123H4").color("red").year(2011).modelKey("6")
+                ])
+                //return {
+                //    allMakes: allMakes,
+                //    allModels: allModels,
+                //    allCars: allCars
+                //};
+            };
+            var viewModel = {
+                //makes : data.allMakes, // Lexus, Toyota, etc.
+                //selectedMake : ko.observable(""),
+                selectedModel : ko.observable("Kian")
+         
+                //models : ko.computed(function() {
+                //    if (!this.selectedMake()) {
+                //        return null;
+                //    }
+                //    var filter = selectedMake().key.toLowerCase();
+                //    return ko.utils.arrayFilter(data.allModels,
+                //        function(item) {
+                //            const itemKey = item.makeKey.toLowerCase();
+                //            return ko.utils.stringStartsWith(itemKey, filter);
+                //        },
+                //        this);
+                //}),
+                //cars : ko.computed(function() {
+                //    if (!selectedModel()) return null;
+                //    var filter = selectedModel().key.toLowerCase();
+                //    return ko.utils.arrayFilter(data.allCars,
+                //        function(item) {
+                //            const itemKey = item.model.key().toLowerCase();
+                //            return ko.utils.stringStartsWith(itemKey, filter);
+                //        });
+
+                //})
+                //return ({
+                //    makes: makes,
+                //    selectedMake: selectedMake,
+                //    selectedModel: selectedModel,
+                //    selectedCar: selectedCar,
+                //    models: models,
+                //    cars: cars
+
+                //});
+
+                //});
+            };
+
+
+            //var mysub = this.viewModel.selectedModel.subscribe(function() {
+            //        viewModel.selectedCar(undefined);
+            //    },
+            //    viewModel);
+            ko.applyBindings(viewModel);
+        });
+    </script>
+</head>
+
+<body>
+    <span id="firstName" data-bind="text: selectedModel "></span>
+</body>
+</html>
+
